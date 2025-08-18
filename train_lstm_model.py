@@ -42,10 +42,7 @@ print("✅ Модель обучена и сохранена как lstm_model.h
 # === Telegram уведомление ===
 try:
     msg = f"✅ Модель переобучена\nПоследняя цена: ${round(df['close'].iloc[-1], 2)}\nДлина данных: {len(df)}"
-    bots = [
-        {"token": "7615441604:AAFVCXNCBUEZ5931tnqV-puwTM7tqo-Pp5o", "chat_id": "7383322972"},
-        {"token": "7559121350:AAHvI8ffL35vwlag71jWfrNhUsPpYed6klI", "chat_id": "5517605130"}
-    ]
+    bots = [{"token": os.getenv("TG_TOKEN"), "chat_id": os.getenv("TG_CHAT_ID")}]
     for bot in bots:
         url = f"https://api.telegram.org/bot{bot['token']}/sendMessage"
         requests.post(url, json={"chat_id": bot["chat_id"], "text": msg})
